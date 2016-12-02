@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mappers.BookMapper">
+
+	<!-- 查询书的全部信息 -->
+	<select id="findAll" resultType="com.spring.models.Book">
+	select * from book;
+	</select>
+	
+	<!-- 通过id来查询书籍信息 -->
+	<select id="findById" parameterType="int" resultType="com.spring.models.Book"> 
+	select * from book where id=#{id}	
+	</select>
+	
+	
+	<!-- 添加书籍信息 -->
+	<insert id="add" parameterType="com.spring.models.Book" useGeneratedKeys="true" keyProperty="id">
+	insert into book(title,brief,author) 
+	values(#{title}, #{brief} , #{author})	
+	</insert>
+	
+	<!-- 跟新信息 -->
+	<update id="modify" parameterType="com.spring.models.Book">
+	update book set
+	title=#{title} ,
+	brief=#{brief},
+	author=#{author}
+	where id=#{id}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+	delete from book where id=#{id}
+	</delete>
+</mapper>
